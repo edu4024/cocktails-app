@@ -1,6 +1,7 @@
 const path = require('path');
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
 	entry: './src/main.js',
@@ -28,7 +29,7 @@ module.exports = {
 			},
 			{
 				test: /\.css$|.scss$|.sass$/,
-				use: ['vue-style-loader', 'style-loader', 'css-loader', 'saas-loader']
+				use: ['vue-style-loader', 'style-loader', 'css-loader', 'sass-loader']
 			},
 			{
 				test: /\.(png|jpg|gif|svg)$/,
@@ -48,14 +49,13 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
 		new VueLoaderPlugin(),
 		new HtmlPlugin({
 			title: 'cocktails app'
 		})
 	],
 	devServer: {
-		compress: true,
-		historyApiFallback: true,
 		hot: true,
 		open: true,
 		port: 8080
